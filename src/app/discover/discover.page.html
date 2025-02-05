@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="filterPosts()"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="post-grid">
+    <ion-row>
+      <ion-col size="4" *ngFor="let post of filteredPosts" class="post-item">
+        <div class="post-container">
+          <ng-container *ngIf="post.type === 'image'; else videoTemplate">
+            <img [src]="post.media" class="post-image" />
+          </ng-container>
+          <ng-template #videoTemplate>
+            <video 
+              [src]="post.media" 
+              class="post-image" 
+              muted 
+              autoplay 
+              loop 
+              playsinline 
+              (click)="toggleVideo($event)">
+            </video>
+          </ng-template>
+          <div *ngIf="post.type === 'video'" class="play-icon">
+            <ion-icon name="play-circle"></ion-icon>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,87 @@
+<ion-content class="dark-content">
+  <div class="content-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <ion-avatar class="profile-picture">
+        <img src="assets/avatar9.jpg" alt="profile picture" />
+      </ion-avatar>
+      
+      <div class="profile-info">
+        <div class="username-section">
+          <h2>danii.gutierrezz</h2>
+          <div class="action-buttons">
+            <ion-button fill="solid" class="edit-profile-btn">Editar perfil</ion-button>
+            <ion-button fill="solid" class="archive-btn">Ver archivo</ion-button>
+            <ion-button fill="clear">
+              <ion-icon name="settings-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+        
+        <div class="stats-container">
+          <div class="stat">
+            <strong>3</strong> publicación
+          </div>
+          <div class="stat">
+            <strong>1500</strong> seguidores
+          </div>
+          <div class="stat">
+            <strong>55</strong> seguidos
+          </div>
+        </div>
+        
+        <div class="bio">
+          <span class="name">Daniel Gutierrez</span>
+          <span class="time">0:55🔥</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Highlights Section -->
+    <div class="highlights-section">
+      <div class="highlight-item" *ngFor="let story of stories" (click)="showStory(story)">
+        <div class="highlight-circle">
+          <img [src]="story.image" [alt]="story.label" />
+        </div>
+        <span>{{story.label}}</span>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-circle new-highlight">
+          <ion-icon name="add"></ion-icon>
+        </div>
+        <span>Nuevo</span>
+      </div>
+    </div>
+
+    <!-- Posts Section -->
+    <div class="posts-section">
+      <ion-segment [(ngModel)]="selectedTab">
+        <ion-segment-button value="posts">
+          <ion-icon name="grid-outline"></ion-icon>
+          <ion-label>PUBLICACIONES</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="saved">
+          <ion-icon name="bookmark-outline"></ion-icon>
+          <ion-label>GUARDADAS</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="tagged">
+          <ion-icon name="pricetag-outline"></ion-icon>
+          <ion-label>ETIQUETADAS</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <div class="posts-grid" *ngIf="selectedTab === 'posts'">
+        <img *ngFor="let post of posts" [src]="post.image" alt="post" />
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- Modal para historias -->
+<ion-modal [isOpen]="isStoryOpen" (didDismiss)="closeStory()">
+  <ng-template>
+    <div class="story-modal">
+      <img [src]="currentStory?.image" [alt]="currentStory?.label" />
+    </div>
+  </ng-template>
+</ion-modal>

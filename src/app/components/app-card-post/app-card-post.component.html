@@ -1,0 +1,11 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ post.user }}</ion-card-title>
+  </ion-card-header>
+  <img [src]="post.image" />
+  <ion-card-content>
+    <ion-button fill="clear" (click)="onLike()">
+      <ion-icon [name]="post.liked ? 'heart' : 'heart-outline'" color="danger"></ion-icon>
+    </ion-button>
+  </ion-card-content>
+</ion-card>
